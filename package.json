@@ -1,0 +1,14 @@
+{
+  "name": "qed-challenge",
+  "version": "1.0.0",
+  "description": "Weather geolocation application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rares Sabau",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
