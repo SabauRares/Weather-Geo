@@ -1,6 +1,3 @@
-const { data } = require("jquery");
-
-
 function getWeather(){
     let temperature = document.getElementById("temperature");
     let location = document.getElementById("location");
@@ -13,17 +10,21 @@ function getWeather(){
 
 
     function success(position){
-        console.log(position);
+        //console.log(position);
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
 
-        let url = api + "?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey + "&units=imperial";
-
+        let url = "http://api.weatherapi.com/v1/forecast.json?key=f31428e5855f461281f145353211611&q="+latitude+","+longitude+"&days=1&aqi=no&alerts=no";
+        console.log(position);
         $.getJSON(url,function(data){
-            var celsius = Math.round(data.main.temp - 273);
-            $("#location").html(data.name + " , " + data.sys.country);
-            $("#temperature").html(celsius);
-            $("#description").html(data.weather[0].description);
+            //console.log(position);
+            // console.log(data.name + " , " + data.sys.country);
+            //console.log(data.weather[0].description);
+            //var celsius = Math.round(data.main.temp_c - 273);
+            //console.log(celsius);
+            $('#location').html(data.name + " , " + data.sys.country);
+            $('#temperature').html(data.main.temp_c);
+            $('#description').html(data.weather[0].description);
         });
        
     }
