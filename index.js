@@ -5,43 +5,24 @@ function getWeather(){
     
     let api = "https://www.weatherapi.com/my/";
     let apiKey = "f31428e5855f461281f145353211611";
+//------------------------------------------------------------ initialization
+   
+    navigator.geolocation.getCurrentPosition(success,error);   //getting the geolocation  
 
-    navigator.geolocation.getCurrentPosition(success,error);
 
-
-    function success(position){
+    function success(position){  // if the function succedes, procede
        // console.log(position);
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
 
         let url = "http://api.weatherapi.com/v1/forecast.json?key=f31428e5855f461281f145353211611&q="+latitude+","+longitude+"&days=7&aqi=no&alerts=no";
-        //console.log(position);
-        $.getJSON(url,function(data){
+        //setting the url for the api
+
+        $.getJSON(url,function(data){  //getting the forcast for the next n days as a json
+
             console.log(data);
             var day=new Date(data.forecast.forecastday[0].date);
-            //const day1 = weekday.getDay();
-           /* switch (new Date(data.forecast.forecastday[0].date).getDay()) {
-                case 0:
-                  day = "Sunday";
-                  break;
-                case 1:
-                  day = "Monday";
-                  break;
-                case 2:
-                  day = "Tuesday";
-                  break;
-                case 3:
-                  day = "Wednesday";
-                  break;
-                case 4:
-                  day = "Thursday";
-                  break;
-                case 5:
-                  day = "Friday";
-                  break;
-                case 6:
-                  day = "Saturday";
-              }*/
+           
             var weekday = new Array(7);
             weekday[0] = "Sunday";
             weekday[1] = "Monday";
@@ -52,17 +33,19 @@ function getWeather(){
             weekday[6] = "Saturday";
             var d= day.getDay();
             var i=0;
-            //console.log(data.location.region);
-            //console.log(data.current.condition.text);
-            //var celsius = Math.round(data.main.temp_c - 273);
-            //console.log(celsius);
-            //console.log(data.forecast.forecastday[0].date);
+// We use getDay to get a number coresponding to a day of the week and 
+//then we create an array to store the string that containt the actual day of the week
+            
             $('#date').html(weekday[d + i]);
             $('#location').html(data.location.name + " , " + data.location.region + " , " +data.location.country);
             $('#temperature').html(data.current.temp_c + " ℃");
             $('#description').html(data.current.condition.text);
               i++;
               if((d+i)>6){d=d-7;}
+
+//We atribute to each ID of the HTML file the data collected from the weather api, that will be displayed
+//We then reset the value we got from getDay()   if(The value we got from the function + number of days that passed)>7
+//We repete this procedure as many times, as days we want
 
             $('#date1').html(weekday[d + i]);
             $('#location1').html(data.location.name + " , " + data.location.region + " , " +data.location.country);
@@ -95,14 +78,16 @@ function getWeather(){
             $('#location6').html(data.location.name + " , " + data.location.region + " , " +data.location.country);
             $('#temperature6').html(data.forecast.forecastday[6].day.avgtemp_c + " ℃");
             $('#description6').html(data.forecast.forecastday[6].day.condition.text);*/
+        
+            //The Api forcast feature only gave us the forecast for 3 days 
         });
        
     }
 
 
-    function error(){
-        console.log("Location could not be accessed")
+    function error(){    //if we can not get the geolocation , we return an error message
+        error.textContent="Location could not be accessed";
     }
 }
 
-getWeather();
+getWeather(); //we call the function
