@@ -1,5 +1,5 @@
 .jumbotron{
-    background:rgb(0, 140, 255);
+    background:#142850;
     color: yellow;
     padding: 10px 10px 10px 10px;
 }
@@ -7,4 +7,8 @@
 .row-content{
     padding: 10px 0px 0px 10px;
     border-bottom: 1px ridge blue;
+}
+
+.container{
+    background-color: #fcd1d1 ;
 }

@@ -1,7 +1,7 @@
 function getWeather(){
     let temperature = document.getElementById("temperature");
     let location = document.getElementById("location");
-    let description = document.getElementById("description")
+    let description = document.getElementById("description");
     
     let api = "https://www.weatherapi.com/my/";
     let apiKey = "f31428e5855f461281f145353211611";
