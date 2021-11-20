@@ -1,8 +1,4 @@
 function getWeather(){
-    let temperature = document.getElementById("temperature");
-    let location = document.getElementById("location");
-    let description = document.getElementById("description");
-    
     let api = "https://www.weatherapi.com/my/";
     let apiKey = "f31428e5855f461281f145353211611";
 //------------------------------------------------------------ initialization
@@ -15,7 +11,7 @@ function getWeather(){
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
 
-        let url = "http://api.weatherapi.com/v1/forecast.json?key=f31428e5855f461281f145353211611&q="+latitude+","+longitude+"&days=7&aqi=no&alerts=no";
+        let url = "http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=" + latitude + "," + longitude + "&days=7&aqi=no&alerts=no";
         //setting the url for the api
 
         $.getJSON(url,function(data){  //getting the forcast for the next n days as a json
@@ -40,6 +36,7 @@ function getWeather(){
             $('#location').html(data.location.name + " , " + data.location.region + " , " +data.location.country);
             $('#temperature').html(data.current.temp_c + " ℃");
             $('#description').html(data.current.condition.text);
+           // $('icon').html(data.forecast.forecastday[0].day.condition.icon); -- tryed adding the icon for the forecast, but it does not load anything
               i++;
               if((d+i)>6){d=d-7;}
 
@@ -91,3 +88,4 @@ function getWeather(){
 }
 
 getWeather(); //we call the function
+
